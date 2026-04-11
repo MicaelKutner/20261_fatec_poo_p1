@@ -82,6 +82,13 @@ public class Personagem{
                 break;
         }
     }
+    boolean estaMorto(){
+        if (energia <= 0){
+            System.out.println(this.nome + " morreu");
+            return true;
+        }
+        return false;
+    }
     public String toString(){
         var sb = new StringBuilder("");
         sb.append("\n").append(nome).append(" status:");
