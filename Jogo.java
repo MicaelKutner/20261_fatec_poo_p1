@@ -17,29 +17,57 @@ public class Jogo {
         colecao.add(new Musica("Paranoid"));
         colecao.add(new Musica("Snowblind"));
         colecao.add(new Musica("Dogs"));
-        
+        var p2 = new Personagem("Tico Trovador", 3, 8, 8);
+        p2.novaMusica(new Musica("Cheia de Manias"));
         while(true){
-            var oQueFazer = gerador.nextInt(1,4);
-            switch(oQueFazer){
-                case 1:
-                    p1.cacar();
-                    break;
-                case 2:
-                    p1.comer();
-                    break;
-                case 3:
-                    p1.dormir();
-                    break;                   
+            if(!p1.estaMorto()){
+                var oQueFazer = gerador.nextInt(1,4);
+                switch(oQueFazer){
+                    case 1:
+                        p1.cacar();
+                        break;
+                    case 2:
+                        p1.comer();
+                        break;
+                    case 3:
+                        p1.dormir();
+                        break;                   
+                }
+        
+                p1.aprenderMusica(colecao);
+                if(p1.estaMorto()){
+                    System.out.println(p1.nome + " morreu");
+                }
             }
-            p1.aprenderMusica(colecao);
+            if(!p2.estaMorto()){
+                var oQueFazer2 = gerador.nextInt(1,11);
+
+                    switch(oQueFazer2){
+                        case 1, 2:
+                            p2.cacar();
+                            break;
+                        case 3, 4:
+                            p2.comer();
+                            break;
+                        case 5,6,7,8,9,10:
+                            p2.dormir();
+                            break;
+                }
+                p2.aprenderMusica(colecao);
+                if(p2.estaMorto()){
+                    System.out.println(p2.nome + " morreu");
+                }
+            }
             boolean teste = p1.estaMorto();
+            boolean teste2 = p2.estaMorto();
             System.out.println(p1);
+            System.out.println(p2);
             System.out.println("******************************");
-            if(teste){
+            if(teste && teste2){
                 System.out.println("Fim de Jogo!");
                 break;
             }
-            Thread.sleep(5000);
+            //Thread.sleep(5000);
         }
         
     }

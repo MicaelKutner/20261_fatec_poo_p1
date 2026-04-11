@@ -27,6 +27,16 @@ public class Personagem{
         this.fome = fome >= 0 && fome <= 10 ? fome : 0;
         this.sono = sono >= 0 && sono <= 10 ? sono : 0;
     }
+    Personagem(String nome,int energia, int fome, int sono){
+        System.out.println("Construindo novo personagem");
+        this.nome = nome;
+        this.energia = energia < 0 || energia > 10 ? 10 : energia;
+        this.fome = fome >= 0 && fome <= 10 ? fome : 0;
+        this.sono = sono >= 0 && sono <= 10 ? sono : 0;
+    }
+    void novaMusica(Musica musica){
+        repertorio.add(musica);
+    }
     void cacar(){
         if(energia >= 2){
             System.out.printf("%s caçando\n", nome);
@@ -43,12 +53,12 @@ public class Personagem{
     //método comer
     void comer(){
         if(fome >= 1){
-            System.out.println(nome + " comendo");
+            System.out.println(nome + " comendo\n");
             energia = Math.min(energia + 1, 10);
             fome--;
         }
         else{
-            System.out.println(nome + " sem fome");
+            System.out.println(nome + " sem fome\n");
         }
     }
     //método dormir
@@ -58,7 +68,7 @@ public class Personagem{
         energia = energia == 10 ? energia : energia + 1;
         sono -= 1;
         }else{
-        System.out.println(nome + " sem sono");
+        System.out.println(nome + " sem sono\n");
         }
     }
     //método loot
@@ -87,21 +97,24 @@ public class Personagem{
         var gerador = new Random();
         var qualeAmusica = gerador.nextInt(0, 10);
         if (repertorio.contains(disponiveis.get(qualeAmusica))){
-            System.out.println("Eu lembro dessa musica");
-        }
+            System.out.println(nome + " 'Eu lembro dessa musica'\n");
+        }  
         else{
             repertorio.add(disponiveis.get(qualeAmusica));
+            System.out.println("\n"+nome + " Aprendeu uma nova musica!\n");
         }
     }
     boolean estaMorto(){
         if (energia <= 0){
-            System.out.println(this.nome + " morreu");
             return true;
         }
         return false;
     }
     public String toString(){
         var sb = new StringBuilder("");
+        if(estaMorto()){
+            sb.append("\n").append("Falecido");
+        }
         sb.append("\n").append(nome).append(" status:");
         sb.append("\n").append("energia: ").append(energia);
         sb.append("\n").append("fome: ").append(fome);
