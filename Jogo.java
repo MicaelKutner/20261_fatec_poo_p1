@@ -19,7 +19,9 @@ public class Jogo {
         colecao.add(new Musica("Dogs"));
         var p2 = new Personagem("Tico Trovador", 3, 8, 8);
         p2.novaMusica(new Musica("Cheia de Manias"));
+        boolean campeaoDeclarado = false;
         while(true){
+            
             if(!p1.estaMorto()){
                 var oQueFazer = gerador.nextInt(1,4);
                 switch(oQueFazer){
@@ -33,8 +35,9 @@ public class Jogo {
                         p1.dormir();
                         break;                   
                 }
-        
-                p1.aprenderMusica(colecao);
+                if(!p1.estaMorto()){
+                    p1.aprenderMusica(colecao);
+                }
                 if(p1.estaMorto()){
                     System.out.println(p1.nome + " morreu");
                 }
@@ -53,21 +56,41 @@ public class Jogo {
                             p2.dormir();
                             break;
                 }
-                p2.aprenderMusica(colecao);
+                if(!p2.estaMorto()){
+                    p2.aprenderMusica(colecao);
+                }
                 if(p2.estaMorto()){
                     System.out.println(p2.nome + " morreu");
                 }
             }
-            boolean teste = p1.estaMorto();
-            boolean teste2 = p2.estaMorto();
+            var novoGerador = gerador.nextInt(1, 3);
+            if(!p1.estaMorto() && !p2.estaMorto()){
+                
+                switch(novoGerador){
+                    case 1:
+                        p1.duelar(p2);
+                        break;
+                    case 2:
+                        p2.duelar(p1);
+                        break;
+                }
+            }
+            if(p1.estaMorto() && !p2.estaMorto() && !campeaoDeclarado){
+                System.out.println(p2.nome+" é o campeão dos bardos\n");
+                campeaoDeclarado = true;
+            }
+            if(!p1.estaMorto() && p2.estaMorto() && !campeaoDeclarado){
+                System.out.println(p1.nome+" é o novo campeão dos bardos\n");
+                campeaoDeclarado = true;
+            }
             System.out.println(p1);
             System.out.println(p2);
             System.out.println("******************************");
-            if(teste && teste2){
+            if(p1.estaMorto() && p2.estaMorto()){
                 System.out.println("Fim de Jogo!");
                 break;
             }
-            //Thread.sleep(5000);
+            Thread.sleep(5000);
         }
         
     }

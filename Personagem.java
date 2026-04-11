@@ -97,18 +97,42 @@ public class Personagem{
         var gerador = new Random();
         var qualeAmusica = gerador.nextInt(0, 10);
         if (repertorio.contains(disponiveis.get(qualeAmusica))){
-            System.out.println(nome + " 'Eu lembro dessa musica'\n");
+            System.out.println(nome + " lembrou de uma musica\n");
         }  
         else{
             repertorio.add(disponiveis.get(qualeAmusica));
             System.out.println("\n"+nome + " Aprendeu uma nova musica!\n");
         }
     }
+    void dano(){
+        energia -= 1;
+    }
     boolean estaMorto(){
         if (energia <= 0){
             return true;
         }
         return false;
+    }
+    void duelar(Personagem inimigo){
+        if(repertorio.size() == 0){
+            return;
+        }
+        else{
+            var gerador = new Random();
+            var qualeAmusica = gerador.nextInt(0, repertorio.size());
+            Musica ataque = repertorio.get(qualeAmusica);
+            if (inimigo.repertorio.contains(ataque)){
+                this.dano();
+                inimigo.dano();
+                System.out.println("\nO publico ficou entediado.");
+            }
+            else{
+                inimigo.dano();
+                inimigo.novaMusica(ataque);
+                System.out.println("\n"+inimigo.nome+" foi vencido pelo ineditismo de "+this.nome);
+            }
+
+        }
     }
     public String toString(){
         var sb = new StringBuilder("");
