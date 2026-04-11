@@ -9,6 +9,7 @@ public class Personagem{
     private int fome;
     private int sono;
     private ArrayList <String> mochila = new ArrayList<String>();
+    private ArrayList <Musica> repertorio = new ArrayList<Musica>();
     
     Personagem(){
         System.out.println("Construindo novo personagem");
@@ -82,6 +83,16 @@ public class Personagem{
                 break;
         }
     }
+    void aprenderMusica(ArrayList<Musica> disponiveis){
+        var gerador = new Random();
+        var qualeAmusica = gerador.nextInt(0, 10);
+        if (repertorio.contains(disponiveis.get(qualeAmusica))){
+            System.out.println("Eu lembro dessa musica");
+        }
+        else{
+            repertorio.add(disponiveis.get(qualeAmusica));
+        }
+    }
     boolean estaMorto(){
         if (energia <= 0){
             System.out.println(this.nome + " morreu");
@@ -95,6 +106,10 @@ public class Personagem{
         sb.append("\n").append("energia: ").append(energia);
         sb.append("\n").append("fome: ").append(fome);
         sb.append("\n").append("sono:").append(sono);
+        sb.append("\n").append("repertorio:");
+        for (int i = 0; i < repertorio.size(); i++){
+            sb.append("\n").append(" - ").append(repertorio.get(i));
+        }
         sb.append("\n").append("inventario:");
         for (int i = 0; i < mochila.size(); i++){
             sb.append("\n").append(" - ").append(mochila.get(i));
