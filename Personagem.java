@@ -3,29 +3,46 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Personagem{
+public abstract class Personagem{
     String nome;
     private int energia;
     private int fome;
     private int sono;
     private ArrayList <String> mochila = new ArrayList<String>();
     private ArrayList <Musica> repertorio = new ArrayList<Musica>();
-    
+   
+    public ArrayList <Musica> colecao = new ArrayList<>();
+
+    public void carregarColecao(){
+        colecao.add(new Musica("Time"));
+        colecao.add(new Musica("Echoes"));
+        colecao.add(new Musica("Into the Void"));
+        colecao.add(new Musica("Solitude"));
+        colecao.add(new Musica("Fairies Wear Boots"));
+        colecao.add(new Musica("Take Five"));
+        colecao.add(new Musica("Sonata No.27 op.90"));
+        colecao.add(new Musica("Paranoid"));
+        colecao.add(new Musica("Snowblind"));
+        colecao.add(new Musica("Dogs"));
+    }
     Personagem(){
         System.out.println("Construindo novo personagem");
         energia = 10;
         fome = 0;
         sono = 0;
+        carregarColecao();
     }
     Personagem(String nome){
         this();
         this.nome = nome;
+        carregarColecao();
     }
     Personagem(int energia, int fome, int sono) {
         System.out.println("Construindo novo personagem");
         this.energia = energia < 0 || energia > 10 ? 10 : energia;
         this.fome = fome >= 0 && fome <= 10 ? fome : 0;
         this.sono = sono >= 0 && sono <= 10 ? sono : 0;
+        carregarColecao();
     }
     Personagem(String nome,int energia, int fome, int sono){
         System.out.println("Construindo novo personagem");
@@ -33,6 +50,7 @@ public class Personagem{
         this.energia = energia < 0 || energia > 10 ? 10 : energia;
         this.fome = fome >= 0 && fome <= 10 ? fome : 0;
         this.sono = sono >= 0 && sono <= 10 ? sono : 0;
+        carregarColecao();
     }
     void novaMusica(Musica musica){
         repertorio.add(musica);
@@ -93,17 +111,18 @@ public class Personagem{
                 break;
         }
     }
-    void aprenderMusica(ArrayList<Musica> disponiveis){
+    void aprenderMusica(){
         var gerador = new Random();
         var qualeAmusica = gerador.nextInt(0, 10);
-        if (repertorio.contains(disponiveis.get(qualeAmusica))){
+        if (repertorio.contains(colecao.get(qualeAmusica))){
             System.out.println(nome + " lembrou de uma musica\n");
         }  
         else{
-            repertorio.add(disponiveis.get(qualeAmusica));
+            repertorio.add(colecao.get(qualeAmusica));
             System.out.println("\n"+nome + " Aprendeu uma nova musica!\n");
         }
     }
+    abstract void realizarAcaoAleatoria();
     void dano(){
         energia -= 1;
     }
