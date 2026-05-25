@@ -18,7 +18,6 @@ public class Jogo {
         // colecao.add(new Musica("Dogs"));
         Personagem p1 = new Cacador("Jarbas");
         Personagem p2 = new Bardo("Tico Trovador", 3, 8, 8);
-        p2.novaMusica(new Musica("Cheia de Manias"));
         boolean campeaoDeclarado = false;
         while(true){
 

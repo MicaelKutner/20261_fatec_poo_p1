@@ -36,6 +36,7 @@ public class Bardo extends Personagem {
         if(!this.estaMorto()){
             var gerador = new Random();
             var oQueFazer = gerador.nextInt(1,11);
+
             switch(oQueFazer){
                 case 1, 2:
                     this.cacar();
@@ -47,12 +48,34 @@ public class Bardo extends Personagem {
                     this.dormir();
                     break;
                 }
-            
-            this.aprenderMusica();
-        }    
-        else{
-            System.out.println(this.nome + " morreu");
+                if(!this.estaMorto()){
+                    this.aprenderMusica();
+                }
+                if(this.estaMorto()){
+                    System.out.println(this.nome + " morreu");
+                }
+            }
+    }
+    @Override
+    public void duelar(Personagem inimigo) {
+        if(getRepertorio().size() == 0){
+            return;
         }
-        
+        else{
+            var gerador = new Random();
+            var qualeAmusica = gerador.nextInt(0, getRepertorio().size());
+            Musica ataque = getRepertorio().get(qualeAmusica);
+            if (inimigo.getRepertorio().contains(ataque)){
+                this.dano();
+                inimigo.dano();
+                System.out.println("\nO publico ficou entediado.");
+            }
+            else{
+                inimigo.dano();
+                inimigo.novaMusica(ataque);
+                System.out.println("\n"+inimigo.nome+" foi vencido pelo ineditismo de "+this.nome);
+            }
+
+        }
     }
 }
