@@ -43,11 +43,10 @@ public class Cacador extends Personagem {
                 case 3:
                     this.dormir();
                     break;                   
-                }
-            
-            if(this.estaMorto()){
-            System.out.println(this.nome + " morreu");
             }
+        } 
+        else{
+            System.out.println(this.nome + " morreu");  
         }
     }
     @Override

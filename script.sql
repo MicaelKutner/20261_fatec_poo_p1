@@ -1,0 +1,4 @@
+--CREATE TABLE tb_musicas(  
+--    cod_musica SERIAL PRIMARY KEY,
+--    titulo VARCHAR(255)
+--);

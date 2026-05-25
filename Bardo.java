@@ -48,12 +48,12 @@ public class Bardo extends Personagem {
                     this.dormir();
                     break;
                 }
-                if(!this.estaMorto()){
-                    this.aprenderMusica();
-                }
-                if(this.estaMorto()){
-                    System.out.println(this.nome + " morreu");
-                }
+                
+            this.aprenderMusica();
+        }
+        else{
+                System.out.println(this.nome + " morreu");
+                
             }
     }
     @Override
