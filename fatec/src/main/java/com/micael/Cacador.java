@@ -1,3 +1,4 @@
+package com.micael;
 import java.util.Random;
 
 public class Cacador extends Personagem {
