@@ -1,3 +1,4 @@
+package com.micael;
 import java.sql.*;
 public class ConnectionFactory {
   private static String usuario = "postgres";

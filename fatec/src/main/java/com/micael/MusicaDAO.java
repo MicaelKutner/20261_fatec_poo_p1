@@ -1,3 +1,4 @@
+package com.micael;
 //data access object: objeto de acesso a dados
 //jdbc: Java DataBase Connectivity
 import java.sql.Connection;
